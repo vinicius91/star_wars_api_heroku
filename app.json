@@ -1,0 +1,22 @@
+
+{
+  "name": "Star Wars API",
+  "description": "A star wars api.",
+  "image": "heroku/python",
+  "repository": "https://github.com/vinicius91/star_wars_api_heroku",
+  "keywords": ["python", "django" ],
+  "env": {
+    "SECRET_KEY": {
+      "description": "The secret key for the Django application.",
+      "generator": "secret"
+    }
+  },
+  "environments": {
+    "test": {
+      "scripts": {
+        "test-setup": "python manage.py collectstatic --noinput",
+        "test": "python manage.py test"
+      }
+    }
+  }
+}
