@@ -12,9 +12,7 @@ https://docs.djangoproject.com/en/2.0/ref/settings/
 import sys
 import os
 import mongoengine
-from dotenv import load_dotenv
 import django_heroku
-load_dotenv()
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -77,31 +75,30 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'star_wars.wsgi.application'
 
-
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
 }
-
+django_heroku.settings(locals())
 # We define 2 Mongo databases - default and test
 MONGODB_DATABASES = {
-    "default": {
-        "database": os.getenv("DATABASE_NAME"),
-        "host": os.getenv("DATABASE_HOST"),
+    'default': {
+        'database': os.getenv("DATABASE_NAME"),
+        'host': os.getenv("DATABASE_HOST"),
         'username': os.getenv("DATABASE_USERNAME"),
         'password': os.getenv("DATABASE_PASSWORD"),
-        "port": 47030,
-        "tz_aware": True,  # if you use timezones in django (USE_TZ = True)
+        'port': os.getenv("DATABASE_PORT"),
+        'tz_aware': True,  # if you use timezones in django (USE_TZ = True)
     },
 
-    "test": {
-        "database": os.getenv("TEST_DATABASE_NAME"),
-        "host": os.getenv("TEST_DATABASE_HOST"),
+    'test': {
+        'database': os.getenv("TEST_DATABASE_NAME"),
+        'host': os.getenv("TEST_DATABASE_HOST"),
         'username': os.getenv("TEST_DATABASE_USERNAME"),
         'password': os.getenv("TEST_DATABASE_PASSWORD"),
-        "port": os.getenv("TEST_DATABASE_PORT"),
+        'port': os.getenv("TEST_DATABASE_PORT"),
         "tz_aware": True,  # if you use timezones in django (USE_TZ = True)
     }
 }
@@ -188,4 +185,3 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-django_heroku.settings(locals())
