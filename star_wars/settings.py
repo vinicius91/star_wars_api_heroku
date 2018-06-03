@@ -92,7 +92,7 @@ MONGODB_DATABASES = {
         "host": os.getenv("DATABASE_HOST"),
         'username': os.getenv("DATABASE_USERNAME"),
         'password': os.getenv("DATABASE_PASSWORD"),
-        "port": int(os.getenv("DATABASE_PORT")),
+        "port": 47030,
         "tz_aware": True,  # if you use timezones in django (USE_TZ = True)
     },
 
