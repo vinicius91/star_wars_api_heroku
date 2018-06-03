@@ -14,7 +14,7 @@ import os
 import mongoengine
 from dotenv import load_dotenv
 import django_heroku
-
+load_dotenv()
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -101,7 +101,7 @@ MONGODB_DATABASES = {
         "host": os.getenv("TEST_DATABASE_HOST"),
         'username': os.getenv("TEST_DATABASE_USERNAME"),
         'password': os.getenv("TEST_DATABASE_PASSWORD"),
-        "port": 47690,
+        "port": os.getenv("TEST_DATABASE_PORT"),
         "tz_aware": True,  # if you use timezones in django (USE_TZ = True)
     }
 }

@@ -100,6 +100,48 @@ class PlanetTest(TestCase):
         self.assertTrue('movie_appearances' in response.data)
         self.assertTrue('url' in response.data)
 
+    def test_cant_create_planet_with_same_name(self):
+        """Ensure that the user is created properly"""
+        login_data = {
+            'username': 'planet@example.com',
+            'password': 'planetpassword'
+        }
+        login_response = self.client.post('/login/', login_data, format='json')
+        # Getting the logged token
+        token = 'Token ' + login_response.data['token']
+        data = {
+            'name': 'Alderaan',
+            'climate': 'temperate',
+            'terrain': 'grasslands, mountains'
+        }
+        client = APIClient()
+        # Using the planet User
+        client.credentials(HTTP_AUTHORIZATION=token)
+        first_response = client.post(
+            '/planets/',
+            data,
+            format='json',
+            headers={
+                'Content-Type': 'application/json'
+            }
+        )
+        # We want to make sure we have no planet in the database..
+        self.assertEqual(Planet.objects.count(), 1)
+        # And that we're returning a 201.
+        self.assertEqual(first_response.status_code, status.HTTP_201_CREATED)
+        # Posting the same planet
+        second_response = client.post(
+            '/planets/',
+            data,
+            format='json',
+            headers={
+                'Content-Type': 'application/json'
+            }
+        )
+        # Count if we still have only one planet in the database
+        self.assertEqual(Planet.objects.count(), 1)
+        # Check if the response is a bad request 400
+        self.assertEqual(second_response.status_code, status.HTTP_400_BAD_REQUEST)
 
 class SwapiMovieAppearancesTest(TestCase):
 
