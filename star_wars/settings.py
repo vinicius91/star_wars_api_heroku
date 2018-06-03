@@ -101,7 +101,7 @@ MONGODB_DATABASES = {
         "host": os.getenv("TEST_DATABASE_HOST"),
         'username': os.getenv("TEST_DATABASE_USERNAME"),
         'password': os.getenv("TEST_DATABASE_PASSWORD"),
-        "port": os.getenv("TEST_DATABASE_PORT"),
+        "port": 47690,
         "tz_aware": True,  # if you use timezones in django (USE_TZ = True)
     }
 }
@@ -112,7 +112,7 @@ def is_test():
     Checks, if we're running the server for real or in unit-test.
     We might need a better implementation of this function.
     """
-    if 'test' in sys.argv or 'testserver' in sys.argv:
+    if 'test' in sys.argv or 'testserver' in sys.argv or os.getenv("TEST_ENABLED") == "TRUE":
         print("Using a test mongo database")
         return True
     else:

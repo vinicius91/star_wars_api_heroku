@@ -1,7 +1,17 @@
-language: "python"
+language: python
 python:
-- "3.6"
+- '3.6'
 install:
-  - "pip install pipenv"
-  - "pipenv install --dev"
-script: make
+- pip install pipenv
+- pipenv install
+script:
+- python manage.py migrate
+deploy:
+  provider: heroku
+  api_key:
+    secure: OGig0Wyv1tBrz/RalkEpl4naA0dC8YwsP6GBjHvDY7fbsinW1zUgIzUs7Dm3Ysjm0RHXuPioDb/HnlfcR1/cFTXi8PSJDw3gryC2YCndfJoRI1MU5cbdlF7SdVGfSE7/3L0okaz4NVK+RXyMMcpXmZM6gYgTXKiWYdIWGlGUmQjKAAT3rhItU8qorfnsd9+E9a0J50EBlAbSzHB2JSpgkV95TCVo/gcB2AJYFgVhrVp5Skz5PSb6XRTrUzBtq2N7ADtJ7PqdRF9T0wLFWx63XM/8NjqkNmctpXohfZ5cr8rE24mwV0NF/D2LmqwwPWOicbLne9xoD2vTwU2oTIoNFT1AYjlo99jW8jdrPA9SulyR35TEmdd0z50W6K3tNE9cBMeoDqiZQ+YHTh4nI2XzAX+UfNZkjMiycHVvbHTVf/FurIFpXDYmtzsWYLOE9fGyTFoYgFEp2cLBIjZSdWiavZNnc1qysREeLL+3/yxp16nNz6uWHXG/sOxFuCM4Tthssrmuj9k4ddPNvpaEBC57Wcu97Z9GRhZqRPM959MQbuozc3z0X2CIhss3mRtBrZZUfOtXnKltYdNxYTu3EfS5ONuHvNLtAtudwQVgkYSfeVUjhgx2imTOg3xBZLfagSpZaBMilIpgmTfOwP+GElVvSSZ7308OXM7YLwz+XPbH/nQ=
+  app: viniro-star-wars-api
+  on:
+    repo: vinicius91/star_wars_api_heroku
+env:
+  global:
