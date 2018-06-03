@@ -4,6 +4,7 @@ verify_ssl = true
 name = "pypi"
 
 [packages]
+django_heroku = "*"
 django-crispy-forms = "==1.7.2"
 django-filter = "==2.0.0.dev1"
 django-forms-bootstrap = "==3.1.0"
