@@ -58,3 +58,4 @@ docs/_build/
 target/
 
 star_wars/\.env
+.env
